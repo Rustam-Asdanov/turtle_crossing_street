@@ -2,7 +2,7 @@ import time
 from turtle import Turtle
 import random
 
-from score_board import TOP_POSITION, RIGHT_POSITION, LEFT_POSITION, BOTTOM_POSITION
+from level_board import TOP_POSITION, RIGHT_POSITION, LEFT_POSITION, BOTTOM_POSITION
 
 
 class Car(Turtle):
@@ -24,7 +24,7 @@ class Car(Turtle):
 
     def start_again(self):
         self.showturtle()
-        self.goto(x=RIGHT_POSITION + 10, y=self.ycor())
+        self.setx(RIGHT_POSITION + 10)
 
     def set_random_color(self):
         R = random.randrange(0, 255, 10)
@@ -34,6 +34,9 @@ class Car(Turtle):
 
     def move(self):
         self.setx(self.xcor() - self.speed)
-        if self.xcor() == LEFT_POSITION - 10:
+        if self.xcor() < LEFT_POSITION - 10:
             self.hideturtle()
             self.start_again()
+
+    def increase_speed(self):
+        self.speed += 5
